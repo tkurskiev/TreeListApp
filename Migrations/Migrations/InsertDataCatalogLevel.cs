@@ -2,11 +2,14 @@
 using FluentMigrator;
 using Npgsql;
 
-namespace Migrations.Migrations
+namespace Migrations
 {
-    [Migration(1)]
+    [Tags("Localhost", "Test")]
+    [Migration(Version)]
     public class InsertDataCatalogLevel : Migration
     {
+        private const int Version = 100;
+
         public override void Up()
         {
             Execute.WithConnection((connection, transaction) =>

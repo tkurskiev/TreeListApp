@@ -1,8 +1,7 @@
 ﻿using System;
-using System.Linq;
 using System.Reflection;
+using FluentMigrator;
 using FluentMigrator.Runner;
-using FluentMigrator.Runner.Initialization;
 
 using Microsoft.Extensions.DependencyInjection;
 
@@ -13,6 +12,8 @@ namespace Migrations
         static void Main(string[] args)
         {
             var serviceProvider = CreateServices();
+
+            var test = Assembly.GetAssembly(typeof(InsertDataCatalogLevel));
 
             // Put the database update into a scope to ensure
             // that all resources will be disposed.
@@ -33,16 +34,26 @@ namespace Migrations
                 // Add common FluentMigrator services
                 .AddFluentMigratorCore()
                 .ConfigureRunner(rb => rb
-                    // Add SQLite support to FluentMigrator
-                    .AddSQLite()
+                    
+                    // Add Postgres
+                    .AddPostgres()
                     // Set the connection string
                     .WithGlobalConnectionString("Server=localhost;Port=5432;User Id=postgres;Password=StormSpirit;Database=TestExercise")
+
+                    // Add SQLite support to FluentMigrator
+                    //.AddSQLite()
+                    // Set the connection string
+                    //.WithGlobalConnectionString("Server=localhost;Port=5432;User Id=postgres;Password=StormSpirit;Database=TestExercise")
+
                     // Define the assembly containing the migrations
-                    .ScanIn(Assembly.GetCallingAssembly()).For.Migrations())
+                    .ScanIn(Assembly.GetAssembly(typeof(InsertDataCatalogLevel))).For.All())
                 // Enable logging to console in the FluentMigrator way
                 .AddLogging(lb => lb.AddFluentMigratorConsole())
                 // Build the service provider
                 .BuildServiceProvider(false);
+
+
+            //.WithMigrationsIn(Assembly.GetAssembly(typeof(InsertDataCatalogLevel)))
         }
 
         /// <summary>
@@ -52,7 +63,7 @@ namespace Migrations
         {
             // Instantiate the runner
             var runner = serviceProvider.GetRequiredService<IMigrationRunner>();
-
+            
             try
             {
                 // Execute the migrations
