@@ -35,8 +35,6 @@ namespace TreeListApp
         {
             try
             {
-                //var data = CatalogLevelDataService.GetAllTreeListDataObjects();
-
                 var viewModels = _catalogLevelDataService.GetAllTreeListDataObjects().Select(x => new ViewModel(x));
 
                 return viewModels;
