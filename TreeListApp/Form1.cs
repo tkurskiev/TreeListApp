@@ -14,7 +14,12 @@ namespace TreeListApp
 
             this.Load += OnLoad;
 
-            treeList1.DataSource = GetViewModels();
+            var dataSource = GetViewModels().ToList();
+
+            //treeList1.ChildListFieldName
+            treeList1.KeyFieldName = nameof(ViewModel.Id);
+            treeList1.ParentFieldName = nameof(ViewModel.ParentId);
+            treeList1.DataSource = dataSource;
         }
 
         private void OnLoad(object sender, EventArgs e)
@@ -46,7 +51,7 @@ namespace TreeListApp
 
             public int Id { get; set; }
 
-            public int? ParentId { get; set; }
+            public int ParentId { get; set; }
 
             public string Name { get; set; }
 
@@ -60,7 +65,7 @@ namespace TreeListApp
             {
                 Id = dto.Id;
 
-                ParentId = dto.ParentId;
+                ParentId = dto.ParentId ?? 0;
 
                 Name = dto.Name;
 

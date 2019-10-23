@@ -6,20 +6,25 @@ using Npgsql;
 
 namespace TreeListApp
 {
-    // TODO: connection CLOSING???
     public static class ConnectionProvider
     {
         private static IDbConnection _dbConnection;
 
         /// <summary>
-        /// Provides default database connection
+        ///     Provides default database connection
         /// </summary>
-        /// <returns><see cref="IDbConnection"/> instance</returns>
+        /// <returns><see cref="IDbConnection" /> instance</returns>
         public static IDbConnection GetDefaultDbConnection()
         {
             return _dbConnection ?? (_dbConnection =
                        new NpgsqlConnection(
                            ConfigurationManager.ConnectionStrings["PostgresTestExercise"].ConnectionString));
+        }
+
+        public static void ReleaseConnection()
+        {
+            _dbConnection.Close();
+            _dbConnection = null;
         }
     }
 }
