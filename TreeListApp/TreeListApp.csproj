@@ -88,21 +88,22 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CatalogLevelDataService.cs" />
+    <Compile Include="DataService\CatalogLevelDataService.cs" />
     <Compile Include="ConnectionProvider.cs" />
     <Compile Include="Exceptions\ExceptionExtensions.cs" />
     <Compile Include="Exceptions\DbException.cs" />
-    <Compile Include="Form1.cs">
+    <Compile Include="TreeListForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="TreeListForm.Designer.cs">
+      <DependentUpon>TreeListForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="DataService\ICatalogLevelDataService.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TreeListDto.cs" />
-    <EmbeddedResource Include="Form1.resx">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <EmbeddedResource Include="TreeListForm.resx">
+      <DependentUpon>TreeListForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\licenses.licx" />
     <EmbeddedResource Include="Properties\Resources.resx">

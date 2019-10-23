@@ -2,13 +2,16 @@
 using System.Collections.Generic;
 using System.Linq;
 using DevExpress.XtraEditors;
+using TreeListApp.DataService;
 using TreeListApp.Exceptions;
 
 namespace TreeListApp
 {
-    public partial class Form1 : DevExpress.XtraEditors.XtraForm
+    public partial class TreeListForm : DevExpress.XtraEditors.XtraForm
     {
-        public Form1()
+        private readonly ICatalogLevelDataService _catalogLevelDataService = new CatalogLevelDataService();
+
+        public TreeListForm()
         {
             InitializeComponent();
 
@@ -34,7 +37,7 @@ namespace TreeListApp
             {
                 //var data = CatalogLevelDataService.GetAllTreeListDataObjects();
 
-                var viewModels = CatalogLevelDataService.GetAllTreeListDataObjects().Select(x => new ViewModel(x));
+                var viewModels = _catalogLevelDataService.GetAllTreeListDataObjects().Select(x => new ViewModel(x));
 
                 return viewModels;
             }

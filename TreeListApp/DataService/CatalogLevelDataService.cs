@@ -5,9 +5,9 @@ using Dapper;
 using Npgsql;
 using TreeListApp.Exceptions;
 
-namespace TreeListApp
+namespace TreeListApp.DataService
 {
-    public static class CatalogLevelDataService
+    public class CatalogLevelDataService : ICatalogLevelDataService
     {
         #region Private Fields
 
@@ -57,7 +57,7 @@ FROM app.catalog_level
         /// </summary>
         /// <returns><see cref="IEnumerable{TreeListDto}"/></returns>
         /// <exception cref="T:TreeListApp.Exceptions.DbException"></exception>
-        public static IEnumerable<TreeListDto> GetAllTreeListDataObjects()
+        public IEnumerable<TreeListDto> GetAllTreeListDataObjects()
         {
             try
             {

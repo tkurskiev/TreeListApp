@@ -23,7 +23,7 @@ namespace TreeListApp
             SkinManager.EnableFormSkins();
             UserLookAndFeel.Default.SetSkinStyle("DevExpress Style");
             Application.ApplicationExit += (sender, args) => { ConnectionProvider.ReleaseConnection(); };
-            Application.Run(new Form1());
+            Application.Run(new TreeListForm());
         }
     }
 }

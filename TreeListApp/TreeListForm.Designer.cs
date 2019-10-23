@@ -1,6 +1,6 @@
 ﻿namespace TreeListApp
 {
-    partial class Form1
+    partial class TreeListForm
     {
         /// <summary>
         /// Required designer variable.
