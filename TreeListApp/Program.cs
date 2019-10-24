@@ -1,10 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Windows.Forms;
-using DevExpress.UserSkins;
-using DevExpress.Skins;
 using DevExpress.LookAndFeel;
+using DevExpress.Skins;
+using DevExpress.UserSkins;
+using DevExpress.XtraEditors;
+using TreeListApp.Exceptions;
 
 namespace TreeListApp
 {
@@ -22,6 +22,29 @@ namespace TreeListApp
             BonusSkins.Register();
             SkinManager.EnableFormSkins();
             UserLookAndFeel.Default.SetSkinStyle("DevExpress Style");
+
+            //AppDomain.CurrentDomain.UnhandledException += (sender, args) => (args.ExceptionObject as Exception).ShowMessage();
+            AppDomain.CurrentDomain.UnhandledException += (sender, args) =>
+            {
+                if (args.ExceptionObject is Exception exception)
+                {
+                    var title = exception.InnerException?.GetType().FullName ?? "Ошибка.";
+                    var message = exception.Message;
+
+                    if (exception.InnerException is DbException dbException)
+                    {
+                        message += $"{Environment.NewLine}{dbException.Message}";
+                        title = dbException.InnerException?.GetType().FullName ?? typeof(DbException).Name;
+                    }
+
+                    XtraMessageBox.Show(message, title, MessageBoxButtons.OK,
+                        MessageBoxIcon.Error);
+
+                    return;
+                }
+
+                (args.ExceptionObject as Exception).ShowMessage();
+            };
             Application.ApplicationExit += (sender, args) => { ConnectionProvider.ReleaseConnection(); };
             Application.Run(new TreeListForm());
         }
