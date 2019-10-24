@@ -12,7 +12,7 @@ namespace TreeListApp.DataService
         #region Private Fields
 
         private static readonly IDbConnection Connection = ConnectionProvider.GetDefaultDbConnection();
-
+        
         private static string _getAllTreeListDataObjectsQuery;
 
         #endregion
