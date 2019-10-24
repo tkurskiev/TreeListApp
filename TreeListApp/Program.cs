@@ -42,8 +42,6 @@ namespace TreeListApp
 
                     return;
                 }
-
-                (args.ExceptionObject as Exception).ShowMessage();
             };
             Application.ApplicationExit += (sender, args) => { ConnectionProvider.ReleaseConnection(); };
             Application.Run(new TreeListForm());
