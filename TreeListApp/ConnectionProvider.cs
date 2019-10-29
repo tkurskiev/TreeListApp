@@ -12,12 +12,9 @@ namespace TreeListApp
         ///     Provides default database connection
         /// </summary>
         /// <returns><see cref="IDbConnection" /> instance</returns>
-        public static IDbConnection GetDefaultDbConnection()
-        {
-            return _dbConnection ?? (_dbConnection =
-                       new NpgsqlConnection(
-                           ConfigurationManager.ConnectionStrings["PostgresTestExercise"].ConnectionString));
-        }
+        public static IDbConnection GetDefaultDbConnection() => _dbConnection ?? (_dbConnection =
+                                                                    new NpgsqlConnection(
+                                                                        ConfigurationManager.ConnectionStrings["PostgresTestExercise"].ConnectionString));
 
         public static void ReleaseConnection()
         {
